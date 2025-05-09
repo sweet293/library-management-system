@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { getBooksData } from '../../data/BooksDetails'; 
 
-const BookSection = ({ sectionTitle, sectionDescription }) => {
+const BookSection = ({ sectionTitle, sectionDescription}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('All');
-
+  
   const books = getBooksData();
   const genres = ['All', ...new Set(books.map(book => book.genre))];
+
+  const filteredBooks = books.filter(book => {
+    const matchesSearch = book.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesGenre = selectedGenre === 'All' || book.genre === selectedGenre;
+    return matchesSearch && matchesGenre;
+  });
 
   return (
     <section className="py-8 px-4 max-w-7xl mx-auto">
@@ -17,7 +23,7 @@ const BookSection = ({ sectionTitle, sectionDescription }) => {
         )}
       </div>
 
-      {/* Filters UI (not functional yet) */}
+      {/* Filters */}
       <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
         <input
           type="text"
@@ -37,22 +43,33 @@ const BookSection = ({ sectionTitle, sectionDescription }) => {
         </select>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-        {books.map((book) => (
-          <div key={book.id} className="bg-white shadow rounded-xl p-3 hover:shadow-2xl hover:bg-[#b2c6dc] transition">
-            <img
-              src={book.coverUrl}
-              alt={book.title}
-              className="w-full h-48 object-cover rounded-md mb-3"
-            />
-            <h3 className="text-lg font-semibold text-gray-800">{book.title}</h3>
-            <p className="text-sm text-gray-500">by {book.author}</p>
-            <span className="text-xs bg-[#a9c2dc] text-[#123458] px-2 py-0.5 rounded mt-1 inline-block">
-              {book.genre}
-            </span>
-          </div>
-        ))}
+      {/* Book Grid */}
+<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+  {filteredBooks.length > 0 ? (
+    filteredBooks.map((book) => (
+      <div
+        key={book.id}
+        className="bg-white shadow rounded-xl hover:shadow-2xl hover:bg-[#e6c5c1] transition overflow-hidden"
+      >
+        <img
+          src={book.coverUrl}
+          alt={book.title}
+          className="w-full h-74 object-cover"
+        />
+        <div className="p-4">
+          <h3 className="text-lg font-semibold text-gray-800">{book.title}</h3>
+          <p className="text-sm text-gray-500">by {book.author}</p>
+          <span className="text-xs bg-[#b9b6b7] text-black px-2 py-0.5 rounded mt-2 inline-block">
+            {book.genre}
+          </span>
+        </div>
       </div>
+    ))
+  ) : (
+    <p className="col-span-full text-center text-gray-500">No books found.</p>
+  )}
+</div>
+
     </section>
   );
 };

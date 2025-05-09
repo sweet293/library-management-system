@@ -30,6 +30,11 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: url('./assets/website/lines.jpg') no-repeat center center fixed;
+  background-size: cover;  /* Ensures it covers the entire viewport */
+  background-position: center;  /* Centers the image */
+  background-repeat: no-repeat;  /* Prevents repetition */
+
 }
 
 h1 {
