@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { getBooksData } from '../../data/BooksDetails'; 
 
 const BookSection = ({ sectionTitle, sectionDescription }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedGenre, setSelectedGenre] = useState('All');
+
   const books = getBooksData();
+  const genres = ['All', ...new Set(books.map(book => book.genre))];
 
   return (
     <section className="py-8 px-4 max-w-7xl mx-auto">
@@ -11,6 +15,26 @@ const BookSection = ({ sectionTitle, sectionDescription }) => {
         {sectionDescription && (
           <p className="mt-2 text-gray-600 text-sm">{sectionDescription}</p>
         )}
+      </div>
+
+      {/* Filters UI (not functional yet) */}
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
+        <input
+          type="text"
+          placeholder="Search books..."
+          className="w-full md:w-1/2 p-2 border border-gray-300 rounded-md"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <select
+          className="w-full md:w-1/4 p-2 border border-gray-300 rounded-md"
+          value={selectedGenre}
+          onChange={(e) => setSelectedGenre(e.target.value)}
+        >
+          {genres.map((genre, index) => (
+            <option key={index} value={genre}>{genre}</option>
+          ))}
+        </select>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
