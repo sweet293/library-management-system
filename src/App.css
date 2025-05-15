@@ -40,3 +40,45 @@
 .read-the-docs {
   color: #888;
 }
+
+.body{
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark {
+  background-color:#181818;
+  color: #fff;
+}
+
+body.light {
+  background-color: #ffffff;
+  color:#000;
+}
+
+.bg-dark {
+  background-color: rgba(24, 24, 24, 0.9);
+}
+
+.bg-light {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Library app specific styles */
+.library-app {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Make sure navbar has proper spacing */
+.library-app .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+}
+
+/* Ensure main content starts below the navbar */
+.library-app main {
+  padding-top: 4rem;
+}

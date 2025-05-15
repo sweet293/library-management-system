@@ -1,19 +1,20 @@
 import { useState } from 'react';
-import { Search, Book, Calendar, Info, User, Menu, X } from 'lucide-react';
+import { Search, Book, Calendar, Info, User, Menu, X, Sun, Moon } from 'lucide-react';
 
-export default function Navbar() {
+export default function Navbar({toggleDarkMode, darkMode}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
+  const toggleMenu = ( {darkMode}) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   
   return (
-    <nav className="bg-[#641B2E] text-[#FBDB93] shadow-lg mx-auto fixed top-0 left-0 right-0 z-10">
+    <nav className={`bg-[#641B2E] text-[#FBDB93] shadow-lg mx-auto fixed top-0 left-0 right-0 z-10 items-center
+    `}>
       {/* Desktop Navbar */}
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
+      <div className="max-w-7xl mx-auto px-4 ">
+        <div className="flex flex-wrap justify-between items-center h-16 gap-x-4">
           {/* Logo and Brand */}
           <div className="flex items-center">
             <div className="flex-shrink-0">
@@ -25,20 +26,20 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center space-x-4">
-            <a href="#catalog" className="!text-[#FBDB93] px-3 py-2 rounded-md text-sm font-medium hover:bg-[#8A2B42] flex items-center">
+          <div className="hidden md:flex items-center space-x-3 mx-6">
+            <a href="#catalog" className="!text-[#FBDB93] px-3 py-2 rounded-md text-sm font-medium hover:bg-[#8A2B42] flex">
               <Book className="h-4 w-4 mr-1" />
               Catalog
             </a>
-            <a href="#events" className="!text-[#FBDB93] px-3 py-2 rounded-md text-sm font-medium hover:bg-[#8A2B42] flex items-center">
+            <a href="#events" className="!text-[#FBDB93] px-3 py-2 rounded-md text-sm font-medium hover:bg-[#8A2B42] flex">
               <Calendar className="h-4 w-4 mr-1" />
               Events
             </a>
-            <a href="#services" className="!text-[#FBDB93] px-3 py-2 rounded-md text-sm font-medium hover:bg-[#8A2B42] flex items-center">
+            <a href="#services" className="!text-[#FBDB93] px-3 py-2 rounded-md text-sm font-medium hover:bg-[#8A2B42] flex">
               <Info className="h-4 w-4 mr-1" />
               Services
             </a>
-            <a href="#about" className="!text-[#FBDB93] px-3 py-2 rounded-md text-sm font-medium hover:bg-[#8A2B42] flex items-center">
+            <a href="#about" className="!text-[#FBDB93] px-3 py-2 rounded-md text-sm font-medium hover:bg-[#8A2B42] flex">
               <Info className="h-4 w-4 mr-1" />
               About
             </a>
@@ -73,7 +74,20 @@ export default function Navbar() {
               )}
             </button>
           </div>
+              {/* Toggle Dark Mode Button */}
+          <div className="flex items-center space-x-4">
+            <button onClick={toggleDarkMode} className="text-[#FBDB93] p-2 rounded-md">
+              {darkMode ? (
+                <Sun className='h-6s w-6'/>
+              ) : (
+                <Moon className = 'h-6 w-6'/>
+              )
+            }
+            </button>
+
+          </div>
         </div>
+        
       </div>
 
       {/* Mobile menu */}
@@ -91,6 +105,9 @@ export default function Navbar() {
           </div>
         </div>
       )}
+
+
+      
     </nav>
   );
 }

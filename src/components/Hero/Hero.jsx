@@ -2,11 +2,13 @@ import React from 'react'
 import Navbar from '../../components/Navbar/Navbar';
 import bookfront2 from "../../assets/website/bookfront2.png"
 import lines from "../../assets/website/lines.jpg"
+import darklines from "../../assets/website/darklines.png"
 
 
-const Hero = () => {
+
+const Hero = ({ darkMode }) => {
   return (
-    <div className="relative -mt-20 bg-cover bg-fixed" style={{ backgroundImage: `url(${lines})` }}>
+    <div className="relative -mt-20 bg-cover bg-fixed" >
       
       {/* Hero Section */}
       <div className="relative mt-0 pt-0">

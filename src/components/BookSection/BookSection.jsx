@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { getBooksData } from '../../data/BooksDetails'; 
 
-const BookSection = ({ sectionTitle, sectionDescription}) => {
+const BookSection = ({ sectionTitle, sectionDescription, darkMode}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('All');
   
@@ -15,11 +15,11 @@ const BookSection = ({ sectionTitle, sectionDescription}) => {
   });
 
   return (
-    <section className="py-8 px-4 max-w-7xl mx-auto">
+    <section className={`py-8 px-4 max-w-7xl mx-auto ${darkMode ? 'text-white' : 'text-gray-800'}`}>
       <div className="mb-6 text-center">
-        <h2 className="text-3xl font-bold text-gray-800">{sectionTitle}</h2>
+        <h2 className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>{sectionTitle}</h2>
         {sectionDescription && (
-          <p className="mt-2 text-gray-600 text-sm">{sectionDescription}</p>
+          <p className={`mt-2 text-gray-600 text-sm ${darkMode ?  'text-gray-600' : 'text-gray-300'}`}>{sectionDescription}</p>
         )}
       </div>
 
@@ -28,18 +28,26 @@ const BookSection = ({ sectionTitle, sectionDescription}) => {
         <input
           type="text"
           placeholder="Search books..."
-          className="w-full md:w-1/2 p-2 border border-gray-300 rounded-md"
+          className={`w-full md:w-1/2 p-2 border rounded-md ${
+            darkMode 
+              ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
+              : 'bg-white border-gray-300 text-gray-900'
+          }`}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <select
-          className="w-full md:w-1/4 p-2 border border-gray-300 rounded-md"
-          value={selectedGenre}
-          onChange={(e) => setSelectedGenre(e.target.value)}
-        >
-          {genres.map((genre, index) => (
-            <option key={index} value={genre}>{genre}</option>
-          ))}
+            className={`w-full md:w-1/4 p-2 border rounded-md ${
+              darkMode 
+                ? 'bg-gray-700 border-gray-600 text-white' 
+                : 'bg-white border-gray-300 text-gray-900'
+            }`}
+            value={selectedGenre}
+            onChange={(e) => setSelectedGenre(e.target.value)}
+          >
+            {genres.map((genre, index) => (
+              <option key={index} value={genre}>{genre}</option>
+            ))}
         </select>
       </div>
 
