@@ -1,9 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getBooksData } from '../../data/BooksDetails'; 
 
 const BookSection = ({ sectionTitle, sectionDescription, darkMode}) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedGenre, setSelectedGenre] = useState('All');
+  const [searchTerm, setSearchTerm] = useState(() => {
+    const searching = localStorage.getItem('searchTerm');
+    return searching ? JSON.parse(searching) : '';
+    
+
+  });
+
+  useEffect(()=>{
+    window.localStorage.setItem('searchTerm', JSON.stringify(searchTerm));
+  }, [searchTerm]);
+
+  const [selectedGenre, setSelectedGenre] = useState(() => {
+    const selected = localStorage.getItem('selectedGenre');
+    return selected ? JSON.parse(selected) : 'All';
+  });
+
+  useEffect(() =>{
+    window.localStorage.setItem('selectedGenre', JSON.stringify(selectedGenre));
+  }, [selectedGenre]);
   
   const books = getBooksData();
   const genres = ['All', ...new Set(books.map(book => book.genre))];
