@@ -1,10 +1,6 @@
 import React from 'react'
 import Navbar from '../../components/Navbar/Navbar';
 import bookfront2 from "../../assets/website/bookfront2.png"
-import lines from "../../assets/website/lines.jpg"
-import darklines from "../../assets/website/darklines.png"
-
-
 
 const Hero = ({ darkMode }) => {
   return (
@@ -21,7 +17,7 @@ const Hero = ({ darkMode }) => {
         {/* Hero Text */}
         <div className="absolute inset-0 flex items-center justify-center">
           <h1 className="text-gray-900 text-4xl md:text-7xl font-medium tracking-wide animate-slideUp">
-            Alexandria's Library
+            Library of Alexandria
           </h1>
         </div>
       </div>
